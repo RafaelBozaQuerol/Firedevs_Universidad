@@ -1,0 +1,34 @@
+{% extends "Ciudades/gestion_ciudad.html" %}
+{% load staticfiles %}
+
+{% block encabezado %}
+    <header class="row"></header>
+{% endblock %}
+
+{% block section_superior %}
+{% endblock %}
+
+{% block titulo_tabla %} {% endblock %}
+
+{% block content %}
+    <div class="col-xs-9 placeholder" style="margin-left: 10%">
+        <div class="panel panel-primary">
+            <div class="panel-heading">{{ nombre_form }}</div>
+            <div class="panel-body">
+                {% if form %}
+                    <form method="post" id="registrar_ciudad" enctype="multipart/form-data">{% csrf_token %}
+                        {% include "Ciudades/form_registrar_ciudad.html" %}
+                        <div class="pull-right">
+                            <button class="btn btn-primary" type="submit"> Aceptar</button>
+                            <a class="btn btn-success btn_gestion" href="{% url 'ciudades' %}">
+                                <span class="glyphicon glyphicon-arrow-left"> </span> Ir atrás
+                            </a>
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

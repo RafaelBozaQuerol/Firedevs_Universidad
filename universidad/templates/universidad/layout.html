@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<title>{{ tittle_page }}</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'universidad/content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'universidad/content/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'universidad/content/site.css' %}" />
+    <script src="{% static 'universidad/scripts/modernizr-2.6.2.js' %}"></script>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">Stardevs - Universidad</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'estudiantes' %}">Estudiantes</a></li>
+                    <li><a href="{% url 'profesores' %}">Profesores</a></li>
+                    <li><a href="{% url 'ciudades' %}">Ciudades</a></li>
+                    <li><a href="{% url 'grupos' %}">Grupos</a></li>
+                    <li><a href="{% url 'reporte_estudiantes' %}">Reporte estudiantes</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% block encabezado %}
+    {% endblock %}
+
+    <div class="container body-content">
+    {% block content %}
+         {% block paginate %}
+         {% endblock %}
+    {% endblock %}
+
+
+    </div>
+<div class="panel-footer">
+     <footer>
+            <p>&copy; Rafael Boza Querol - DerCode</p>
+      </footer>
+</div>
+
+
+{% block scripts %}
+    <script src="{% static 'universidad/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'universidad/scripts/bootstrap.js' %}"></script>
+    <script src="{% static 'universidad/scripts/respond.js' %}"></script>
+    <script src="{% static 'universidad/scripts/main.js' %}"></script>
+{% endblock %}
+
+</body>
+</html>

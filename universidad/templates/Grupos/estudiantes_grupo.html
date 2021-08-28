@@ -1,0 +1,50 @@
+{% extends "universidad/layout.html" %}
+
+{% block encabezado %}
+    {% include 'universidad/message.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">{{ nombre_pag }}</div>
+
+        <div class="panel-body">
+ <a class="btn btn-success btn_gestion" href="{% url 'grupos' %}">
+                                <span class="glyphicon glyphicon-arrow-left"> </span> Ir atrás
+                            </a>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered dt-responsive nowrap"
+                       cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Nombre y apellidos</th>
+                        <th>Carnet de identidad</th>
+                        <th>Edad</th>
+                        <th>Sexo</th>
+                        <th>Email</th>
+                        <th>Fecha de nacimiento</th>
+                        <th>Ciudad de nacimiento</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for estudiante in entities %}
+                        <tr>
+                            <td>{{ estudiante.nombre_apellidos }}</td>
+                            <td>{{ estudiante.carnet }}</td>
+                            <td>{{ estudiante.edad }}</td>
+                            <td>{{ estudiante.sexo }}</td>
+                            <td>{{ estudiante.email }}</td>
+                            <td>{{ estudiante.fecha_nacimiento }}</td>
+                            <td>{{ estudiante.ciudad_nacimiento }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% block paginate %}
+                 {% include 'universidad/paginate.html' %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

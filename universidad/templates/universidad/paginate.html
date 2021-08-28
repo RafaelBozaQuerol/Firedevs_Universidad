@@ -1,0 +1,32 @@
+<ul class="pagination pull-right" style="position: relative;top: -25px;padding: 0;margin: 0">
+    {% if entities.has_previous %}
+        <li>
+            <a href="?pagina={{ entities.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" aria-label="Previous">
+                Anterior
+            </a>
+        </li>
+    {% else %}
+        <li class="disabled">
+            <a href="#" aria-label="Previous">
+                Anterior
+            </a>
+        </li>
+    {% endif %}
+
+    <li class="disabled"><a>Página {{ entities.number }} de {{ entities.paginator.num_pages }}</a></li>
+
+    {% if entities.has_next %}
+        <li>
+            <a href="?pagina={{ entities.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" aria-label="Next">
+                Próxima
+            </a>
+        </li>
+    {% else %}
+
+        <li class="disabled">
+            <a href="#" aria-label="Next">
+                Próxima
+            </a>
+        </li>
+    {% endif %}
+</ul>

@@ -1,0 +1,71 @@
+{% extends "universidad/layout.html" %}
+
+{% block encabezado %}
+    {% include 'universidad/message.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">{{ nombre_pag }}</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6 pull-left">
+                    <a class="btn btn-success" href="{% url 'registrar_estudiante' %}">
+                        <span class="glyphicon glyphicon-plus"></span> Registrar
+                    </a>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered dt-responsive nowrap"
+                       cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Nombre y apellidos</th>
+                        <th>Carnet de identidad</th>
+                        <th>Edad</th>
+                        <th>Sexo</th>
+                        <th>Email</th>
+                        <th>Fecha de nacimiento</th>
+                        <th>Ciudad de nacimiento</th>
+                        <th>Grupo</th>
+                        <th width="200">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for estudiante in entities %}
+                        <tr>
+                            <td>{{ estudiante.nombre_apellidos }}</td>
+                            <td>{{ estudiante.carnet }}</td>
+                            <td>{{ estudiante.edad }}</td>
+                            <td>{{ estudiante.sexo }}</td>
+                            <td>{{ estudiante.email }}</td>
+                            <td>{{ estudiante.fecha_nacimiento }}</td>
+                            <td>{{ estudiante.ciudad_nacimiento }}</td>
+                            <td>{{ estudiante.grupo }}</td>
+                            <td class="" align="center">
+
+                                <a href="{% url 'modificar_estudiante' estudiante.id %}"
+                                   class="btn btn-info" title="Modificar"><span
+                                        class="glyphicon glyphicon-pencil"></span></a>
+
+                                <button id="{{ estudiante.id }}" title="Eliminar"
+                                        class="btn btn-danger modal-eliminar"
+                                        data-toggle="modal" data-target="#modal_eliminar"
+                                        onclick="Objeto.__init__({{ estudiante.id }},'estudiantes','modal_eliminar').eliminar();">
+                                      <span class="glyphicon glyphicon-trash">
+                                      </span>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% include 'universidad/modal_eliminar.html' %}
+            {% block paginate %}
+                 {% include 'universidad/paginate.html' %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

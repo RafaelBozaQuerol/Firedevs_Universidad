@@ -1,0 +1,9 @@
+<div class="panel panel-info">
+    <header class="alert-info">
+        {% if messages %}
+            {% for message in messages %}
+                <p class=""><span class="glyphicon glyphicon-ok"></span> {{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </header>
+</div>

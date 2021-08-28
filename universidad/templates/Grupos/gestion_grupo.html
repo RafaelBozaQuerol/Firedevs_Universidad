@@ -1,0 +1,66 @@
+{% extends "universidad/layout.html" %}
+
+{% block encabezado %}
+    {% include 'universidad/message.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">{{ nombre_pag }}</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6 pull-left">
+                    <a class="btn btn-success" href="{% url 'registrar_grupo' %}">
+                        <span class="glyphicon glyphicon-plus"></span> Registrar
+                    </a>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped  table-bordered nowrap"
+                       cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Profesor guia</th>
+                        <th width="200">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for grupo in entities %}
+                        <tr>
+                            <td>{{ grupo.nombre }}</td>
+                            <td>{{ grupo.profesor_guia }}</td>
+                            <td class="" align="center">
+
+                                <a href="{% url 'modificar_grupo' grupo.id %}"
+                                   class="btn btn-info" title="Modificar"><span
+                                        class="glyphicon glyphicon-pencil"></span>
+                                </a>
+
+                                 <a href="{% url 'detalles_grupo' grupo.id %}"
+                                   class="btn btn-info" title="Detalles"><span
+                                        class="glyphicon glyphicon-search"></span>
+                                </a>
+
+                                <button id="{{ grupo.id }}" title="Eliminar"
+                                        class="btn btn-danger modal_eliminar"
+                                        data-toggle="modal" data-target="#modal_eliminar"
+                                        onclick="Objeto.__init__({{ grupo.id }},'grupos','modal_eliminar').eliminar();">
+                                      <span class="glyphicon glyphicon-trash">
+                                      </span>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+            {% include 'universidad/modal_eliminar.html' %}
+        </div>
+    {% block paginate %}
+        {% include 'universidad/paginate.html' %}
+    {% endblock %}
+    </div>
+{% endblock %}
